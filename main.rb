@@ -44,11 +44,26 @@ module Enumerable
   end
 
   def my_select
-    arr = []
     return to_enum :my_each unless block_given?
-
+    arr = []
     my_each { |x| arr.push(x) if yield(x) }
     arr
+  end
+
+  def my_all?(arg = nil, &prc)
+    return to_enum :my_each unless block_given?
+    if block_given? 
+    my_each { |x| return false if prc.call(x) == false } 
+    elsif arg.nil? == false
+      my_each { |x| return false if arg != x}
+    elsif arg.is_a?(Regex)
+        my_each { |x| return false if arg.match?(x.to_s) == false}
+    elsif arg.is_a?(Class)
+      my_each {|x| return false if x.is_a?(arg) == false}
+    else
+      my_each {|x| return false unless x}
+    end
+    true
   end
 end
 
@@ -62,6 +77,9 @@ friends = %w[Sharon Leo Leila Brian Arun]
 # puts "printing for my_each_with_index =>"
 # friends.my_each_with_index { |x, y| puts x if y.odd? }
 
+# puts '========================='
+# puts 'printing for my_select =>'
+# friends.my_select { |x| puts x if x != 'Leo' }
 puts '========================='
-puts 'printing for my_select =>'
-friends.my_select { |x| puts x if x != 'Leo' }
+puts 'printing for my_all? =>'
+puts friends.all? { |word| word.length >= 3 }
