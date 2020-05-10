@@ -1,4 +1,5 @@
 module Enumerable
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def my_each
     return to_enum :my_each unless block_given?
 
@@ -45,41 +46,80 @@ module Enumerable
 
   def my_select
     return to_enum :my_each unless block_given?
+
     arr = []
     my_each { |x| arr.push(x) if yield(x) }
     arr
   end
 
   def my_all?(arg = nil, &prc)
-    return to_enum :my_each unless block_given?
-    if block_given? 
-    my_each { |x| return false if prc.call(x) == false } 
+    if block_given?
+      my_each { |x| return false if prc.call(x) == false }
     elsif arg.nil? == false
-      my_each { |x| return false if arg != x}
+      my_each { |x| return false if arg != x }
     elsif arg.is_a?(Regex)
-        my_each { |x| return false if arg.match?(x.to_s) == false}
+      my_each { |x| return false if arg.match?(x.to_s) == false }
     elsif arg.is_a?(Class)
-      my_each {|x| return false if x.is_a?(arg) == false}
+      my_each { |x| return false if x.is_a?(arg) == false }
+    elsif block_given? == false
+      to_enum
     else
-      my_each {|x| return false unless x}
+      my_each { |x| return false unless x }
+    end
+    true
+  end
+
+  def my_any?(arg = nil, &prc)
+    if block_given?
+      my_each { |x| return true if prc.call(x) }
+    elsif arg.is_a?(Regexp)
+      my_each { |x| return true if arg.match?(x.to_s) == true }
+    elsif arg.is_a?(Class)
+      my_each { |x| return true if x.is_a?(arg) }
+    elsif arg.nil? == false
+      my_each { |x| return true if arg == x }
+    elsif block_given? == false
+      to_enum
+    else
+      my_each { |x| return true if x }
+    end
+    false
+  end
+
+  def my_none?(arg = nil, &prc)
+    if block_given?
+      my_each { |x| return false if prc.call(x) }
+    elsif arg.is_a?(Regexp)
+      my_each { |x| return false if arg.match?(x.to_s) == true }
+    elsif arg.is_a?(Class)
+      my_each { |x| return false if x.is_a?(arg) }
+    elsif arg.nil? == false
+      my_each { |x| return false if x == arg }
+    else
+      my_each { |x| return false if x }
     end
     true
   end
 end
 
 friends = %w[Sharon Leo Leila Brian Arun]
-# movies = { 'a' => 1, 'b' => 2 }
-# puts "printing for my_each =>"
-# puts "========================="
-# friends.my_each { |friend| puts friend }
-# movies.each { |key, value| puts "#{key}, #{value}" }
-# puts "========================="
-# puts "printing for my_each_with_index =>"
-# friends.my_each_with_index { |x, y| puts x if y.odd? }
-
-# puts '========================='
-# puts 'printing for my_select =>'
-# friends.my_select { |x| puts x if x != 'Leo' }
+movies = { 'a' => 1, 'b' => 2 }
+puts 'printing for my_each =>'
+puts '========================='
+friends.my_each { |friend| puts friend }
+movies.each { |key, value| puts "#{key}, #{value}" }
+puts '========================='
+puts 'printing for my_each_with_index =>'
+friends.my_each_with_index { |x, y| puts x if y.odd? }
+puts '========================='
+puts 'printing for my_select =>'
+friends.my_select { |x| puts x if x != 'Leo' }
 puts '========================='
 puts 'printing for my_all? =>'
-puts friends.my_all? { |word| word.length >= 3 }
+puts friends.my_all?(/t/)
+puts '========================='
+puts 'printing for my_any? =>'
+puts [nil, true, 99].my_any?(Integer)
+puts '========================='
+puts 'printing for my_none? =>'
+puts %w[ant bear cat].my_none?(/d/)
