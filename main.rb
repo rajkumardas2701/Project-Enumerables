@@ -82,4 +82,4 @@ friends = %w[Sharon Leo Leila Brian Arun]
 # friends.my_select { |x| puts x if x != 'Leo' }
 puts '========================='
 puts 'printing for my_all? =>'
-puts friends.all? { |word| word.length >= 3 }
+puts friends.my_all? { |word| word.length >= 3 }
