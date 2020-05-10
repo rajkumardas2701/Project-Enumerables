@@ -86,7 +86,7 @@ module Enumerable
     false
   end
 
-  def my_none?(arg = nil, &prc)
+  def my_none?(arg = nil)
     if block_given?
       my_each { |x| return false if prc.call(x) }
     elsif arg.is_a?(Regexp)
@@ -100,26 +100,41 @@ module Enumerable
     end
     true
   end
+
+  def my_count(arg = nil)
+    count = 0
+    if block_given?
+      my_each { |x| count += 1 if yield(x)}
+    elsif arg.nil? == false
+      my_each { |x| count += 1 if x == arg }
+    elsif arg.nil? and block_given? == false
+      my_each { |x| count +=1 if x != nil }
+    end
+    return count
+  end
 end
 
-friends = %w[Sharon Leo Leila Brian Arun]
-movies = { 'a' => 1, 'b' => 2 }
-puts 'printing for my_each =>'
+# friends = %w[Sharon Leo Leila Brian Arun]
+# movies = { 'a' => 1, 'b' => 2 }
+# puts 'printing for my_each =>'
+# puts '========================='
+# friends.my_each { |friend| puts friend }
+# movies.each { |key, value| puts "#{key}, #{value}" }
+# puts '========================='
+# puts 'printing for my_each_with_index =>'
+# friends.my_each_with_index { |x, y| puts x if y.odd? }
+# puts '========================='
+# puts 'printing for my_select =>'
+# friends.my_select { |x| puts x if x != 'Leo' }
+# puts '========================='
+# puts 'printing for my_all? =>'
+# puts friends.my_all?(/t/)
+# puts '========================='
+# puts 'printing for my_any? =>'
+# puts [nil, true, 99].my_any?(Integer)
+# puts '========================='
+# puts 'printing for my_none? =>'
+# puts %w[ant bear cat].my_none?(/d/)
 puts '========================='
-friends.my_each { |friend| puts friend }
-movies.each { |key, value| puts "#{key}, #{value}" }
-puts '========================='
-puts 'printing for my_each_with_index =>'
-friends.my_each_with_index { |x, y| puts x if y.odd? }
-puts '========================='
-puts 'printing for my_select =>'
-friends.my_select { |x| puts x if x != 'Leo' }
-puts '========================='
-puts 'printing for my_all? =>'
-puts friends.my_all?(/t/)
-puts '========================='
-puts 'printing for my_any? =>'
-puts [nil, true, 99].my_any?(Integer)
-puts '========================='
-puts 'printing for my_none? =>'
-puts %w[ant bear cat].my_none?(/d/)
+puts 'printing for my_count? =>'
+puts [1, 2, 3, 2].my_count(2)
