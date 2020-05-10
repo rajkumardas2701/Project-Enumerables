@@ -104,13 +104,20 @@ module Enumerable
   def my_count(arg = nil)
     count = 0
     if block_given?
-      my_each { |x| count += 1 if yield(x)}
+      my_each { |x| count += 1 if yield(x) }
     elsif arg.nil? == false
       my_each { |x| count += 1 if x == arg }
     elsif arg.nil? and block_given? == false
-      my_each { |x| count +=1 if x != nil }
+      my_each { |x| count += 1 unless x.nil? }
     end
-    return count
+    count
+  end
+
+  def my_map
+    return to_enum :my_each unless block_given?
+    array = []
+    my_each { |x| array << yield(x) }
+    array
   end
 end
 
@@ -135,6 +142,9 @@ end
 # puts '========================='
 # puts 'printing for my_none? =>'
 # puts %w[ant bear cat].my_none?(/d/)
+# puts '========================='
+# puts 'printing for my_count? =>'
+# puts [1, 2, 3, 2].my_count(2)
 puts '========================='
-puts 'printing for my_count? =>'
-puts [1, 2, 3, 2].my_count(2)
+puts 'printing for my_map? =>'
+puts [1, 2, 3, 4].my_map { |i| i * i }
