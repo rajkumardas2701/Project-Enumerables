@@ -114,7 +114,11 @@ module Enumerable
   end
 end
 
-friends = %w[Sharon Leo Leila Brian Arun]
+def multiply_els(array)
+  array.my_inject { |product, n| product * n }
+end
+
+# friends = %w[Sharon Leo Leila Brian Arun]
 # movies = { 'a' => 1, 'b' => 2 }
 # puts 'printing for my_each =>'
 # puts '========================='
@@ -143,6 +147,7 @@ friends = %w[Sharon Leo Leila Brian Arun]
 # puts [1, 2, 3, 4].my_map { |i| i * i }
 # puts '========================='
 # puts 'printing for my_inject? =>'
-puts friends.my_inject do |memo, word|
-  memo.length > word.length ? memo : word
-end
+# puts friends.my_inject do |memo, word|
+#   memo.length > word.length ? memo : word
+# end
+puts multiply_els([2, 4, 5])
