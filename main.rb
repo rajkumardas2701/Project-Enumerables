@@ -122,36 +122,36 @@ def multiply_els(array)
   array.my_inject { |product, n| product * n }
 end
 
-# friends = %w[Sharon Leo Leila Brian Arun]
-# movies = { 'a' => 1, 'b' => 2 }
-# puts 'printing for my_each =>'
-# puts '========================='
-# friends.my_each { |friend| puts friend }
-# movies.each { |key, value| puts "#{key}, #{value}" }
-# puts '========================='
-# puts 'printing for my_each_with_index =>'
-# friends.my_each_with_index { |x, y| puts x if y.odd? }
-# puts '========================='
-# puts 'printing for my_select =>'
-# friends.my_select { |x| puts x if x != 'Leo' }
-# puts '========================='
-# puts 'printing for my_all? =>'
-# puts friends.my_all?(/t/)
-# puts '========================='
-# puts 'printing for my_any? =>'
-# puts [nil, true, 99].my_any?(Integer)
-# puts '========================='
-# puts 'printing for my_none? =>'
-# puts %w[ant bear cat].my_none?(/d/)
-# puts '========================='
-# puts 'printing for my_count? =>'
-# puts [1, 2, 3, 2].my_count(2)
-# puts '========================='
-# puts 'printing for my_map? =>'
-# puts [1, 2, 3, 4].my_map { |i| i * i }
-# puts '========================='
-# puts 'printing for my_inject? =>'
-# puts friends.my_inject do |memo, word|
-#   memo.length > word.length ? memo : word
-# end
+friends = %w[Sharon Leo Leila Brian Arun]
+movies = { 'a' => 1, 'b' => 2 }
+puts 'printing for my_each =>'
+puts '========================='
+friends.my_each { |friend| puts friend }
+movies.each { |key, value| puts "#{key}, #{value}" }
+puts '========================='
+puts 'printing for my_each_with_index =>'
+friends.my_each_with_index { |x, y| puts x if y.odd? }
+puts '========================='
+puts 'printing for my_select =>'
+friends.my_select { |x| puts x if x != 'Leo' }
+puts '========================='
+puts 'printing for my_all? =>'
+puts friends.my_all?(/t/)
+puts '========================='
+puts 'printing for my_any? =>'
+puts [nil, true, 99].my_any?(Integer)
+puts '========================='
+puts 'printing for my_none? =>'
+puts %w[ant bear cat].my_none?(/d/)
+puts '========================='
+puts 'printing for my_count? =>'
+puts [1, 2, 3, 2].my_count(2)
+puts '========================='
+puts 'printing for my_map? =>'
+[1, 2, 3, 4].my_map { |i| i * i }
+puts '========================='
+puts 'printing for my_inject? =>'
+friends.my_inject do |memo, word|
+  (memo.length > word.length ? memo : word)
+end
 puts multiply_els([2, 4, 5])

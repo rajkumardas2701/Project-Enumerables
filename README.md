@@ -1,63 +1,35 @@
-# Project Name
+# Enumerables
 
-> One paragraph statement about the project.
-
-![screenshot](./app_screenshot.png)
+> In this project, I've implemented custom version of Enumarable methods
 
 Additional description about the project and its features.
 
 ## Built With
 
-- Major languages,
-- frameworks,
-- technologies used
-
-## Live Demo
-
-[Live Demo Link](https://livedemo.com)
-
+- Ruby
+- Git, Github and VSCode
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
+=> pull repository on your local machine
+=> run ruby main.rb to execute enumerable methods.
 
 
 ## Authors
 
-👤 **Author1**
+👤 **Rajkumar Das**
 
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
-
-👤 **Author2**
-
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Github: [@githubhandle](https://github.com/rajkumardas2701)
+- Twitter: [@twitterhandle](https://twitter.com/Rajkuma58621299)
+- Linkedin: [linkedin](https://www.linkedin.com/in/rajkumar-das-41308961/)
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/rajkumardas2701/Project-Enumerables/issues).
 
 ## Show your support
 
@@ -65,10 +37,8 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+- Team 104 Fornax @Micoverse
 
 ## 📝 License
 
-This project is [MIT](lic.url) licensed.
+This project is [MIT](https://github.com/rajkumardas2701/Project-Enumerables/blob/add-license-1/LICENSE) licensed.
