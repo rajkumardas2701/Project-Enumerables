@@ -1,8 +1,8 @@
 # Enumerables
 
-> In this project, I've implemented custom version of Enumarable methods
+> Implementation of custom Ruby Enumarable methods
 
-Additional description about the project and its features.
+In this project, you would see methods which are replica of Ruby Enumerable methods. These methods are implemented using Ruby Proc, yield and call methods.
 
 ## Built With
 
@@ -13,7 +13,7 @@ Additional description about the project and its features.
 
 To get a local copy up and running follow these simple example steps.
 
-=> pull repository on your local machine
+=> pull repository on your local machine /n
 => run ruby main.rb to execute enumerable methods.
 
 
