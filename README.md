@@ -13,7 +13,7 @@ In this project, you would see methods which are replica of Ruby Enumerable meth
 
 To get a local copy up and running follow these simple example steps.
 
-=> pull repository on your local machine /n
+=> pull repository on your local machine <br>
 => run ruby main.rb to execute enumerable methods.
 
 
