@@ -12,26 +12,6 @@ module Enumerable
     self
   end
 
-  # def my_each
-  #   return to_enum :my_each unless block_given?
-
-  #   # self.x = x
-  #   # self.y = y
-  #   i = 0
-  #   j = 0
-  #   # a = is_a?(Range) ? to_a : self
-  #   b = is_a?(Hash) ? to_hash : self
-  #   # puts a
-  #   # puts b
-  #   while i < b.length
-  #     yield b
-  #     # puts self[i], self[j]
-  #     i += 1
-  #     j += 1
-  #   end
-  #   # a, b
-  # end
-
   def my_each_with_index
     i = 0
     return to_enum :my_each unless block_given?
@@ -115,13 +95,26 @@ module Enumerable
 
   def my_map
     return to_enum :my_each unless block_given?
+
     array = []
     my_each { |x| array << yield(x) }
     array
   end
+
+  def my_inject(*args)
+    arr = is_a?(Range) ? to_a : self
+    int_val = args[0] if args[0].is_a?(Integer)
+    op = args[0].is_a?(Symbol) ? args[0] : args[1]
+    if op
+      arr.my_each { |x| int_val = int_val ? int_val.send(op, x) : x }
+      return int_val
+    end
+    arr.my_each { |x| int_val = int_val ? yield(int_val, x) : x }
+    int_val
+  end
 end
 
-# friends = %w[Sharon Leo Leila Brian Arun]
+friends = %w[Sharon Leo Leila Brian Arun]
 # movies = { 'a' => 1, 'b' => 2 }
 # puts 'printing for my_each =>'
 # puts '========================='
@@ -145,6 +138,11 @@ end
 # puts '========================='
 # puts 'printing for my_count? =>'
 # puts [1, 2, 3, 2].my_count(2)
-puts '========================='
-puts 'printing for my_map? =>'
-puts [1, 2, 3, 4].my_map { |i| i * i }
+# puts '========================='
+# puts 'printing for my_map? =>'
+# puts [1, 2, 3, 4].my_map { |i| i * i }
+# puts '========================='
+# puts 'printing for my_inject? =>'
+puts friends.my_inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
