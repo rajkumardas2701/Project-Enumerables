@@ -8,11 +8,17 @@ AllCops:
 
 Layout/LineLength:
   Max: 120
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
 Metrics/MethodLength:
   Max: 20
 Metrics/AbcSize:
   Max: 50
 Metrics/ClassLength:
+  Max: 150
+Metrics/ModuleLength:
   Max: 150
 Metrics/BlockLength:
   ExcludedMethods: ['describe']
