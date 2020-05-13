@@ -31,43 +31,39 @@ module Enumerable
     arr
   end
 
-  def my_all?(arg = nil, &prc)
+  def my_all?(arg = nil, &block)
     if block_given?
-      my_each { |x| return false if prc.call(x) == false }
-    elsif arg.nil? == false
-      my_each { |x| return false if arg != x }
-    elsif arg.is_a?(Regex)
+      my_each { |x| return false if block.call(x) == false }
+    elsif arg.is_a?(Regexp)
       my_each { |x| return false if arg.match?(x.to_s) == false }
     elsif arg.is_a?(Class)
       my_each { |x| return false if x.is_a?(arg) == false }
-    elsif block_given? == false
-      to_enum
+    elsif arg.nil? == false
+      my_each { |x| return false if arg != x }
     else
       my_each { |x| return false unless x }
     end
     true
   end
 
-  def my_any?(arg = nil, &prc)
+  def my_any?(arg = nil, &block)
     if block_given?
-      my_each { |x| return true if prc.call(x) }
+      my_each { |x| return true if block.call(x) }
     elsif arg.is_a?(Regexp)
       my_each { |x| return true if arg.match?(x.to_s) == true }
     elsif arg.is_a?(Class)
       my_each { |x| return true if x.is_a?(arg) }
     elsif arg.nil? == false
       my_each { |x| return true if arg == x }
-    elsif block_given? == false
-      to_enum
     else
       my_each { |x| return true if x }
     end
     false
   end
 
-  def my_none?(arg = nil)
+  def my_none?(arg = nil, &block)
     if block_given?
-      my_each { |x| return false if prc.call(x) }
+      my_each { |x| return false if block.call(x) }
     elsif arg.is_a?(Regexp)
       my_each { |x| return false if arg.match?(x.to_s) == true }
     elsif arg.is_a?(Class)
@@ -92,12 +88,12 @@ module Enumerable
     count
   end
 
-  def my_map(&proc)
+  def my_map(*prc)
     return to_enum :my_each unless block_given?
 
     array = []
-    if proc
-      my_each { |x| array << proc.call(x) }
+    if prc[0]
+      my_each { |x| array << prc[0].call(x) }
     else
       my_each { |x| array << yield(x) }
     end
@@ -116,6 +112,8 @@ module Enumerable
     int_val
   end
 end
+
+# End of Enumerable
 
 def multiply_els(array)
   array.my_inject { |product, n| product * n }
