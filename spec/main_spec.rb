@@ -39,17 +39,17 @@ describe Enumerable do
 
   describe 'my_all' do
     it 'should return true if a block is given and all elements meet the specified condition' do
-        expect(%w[ant bear cat].my_all? { |word| word.length >= 3 }).to eql(true)
+      expect(%w[ant bear cat].my_all? { |word| word.length >= 3 }).to eql(true)
     end
-  
+
     it 'should return false if a block is given and all elements do not meet the specified condition' do
-        expect(%w[ant bear cat].my_all? { |word| word.length >= 4 }).to eql(false)
+      expect(%w[ant bear cat].my_all? { |word| word.length >= 4 }).to eql(false)
     end
-  
+
     it 'should return false if all elements do not belong to a specified class' do
-        expect([1, 'String', 3.14].my_all?(Numeric)).to eql(false)
+      expect([1, 'String', 3.14].my_all?(Numeric)).to eql(false)
     end
-  
+
     it 'should return true if all elements match a regular expression' do
       expect(%w[ant bat cat].my_all?(/t/)).to eql(true)
     end
