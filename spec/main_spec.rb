@@ -140,4 +140,27 @@ describe Enumerable do
       expect { %w[ant bat cat].my_none?(String, 1) }.to raise_error(ArgumentError)
     end
   end
+
+  describe 'my_count' do
+    it 'When no block and no argument are give returns the number of elements' do
+      expect([1, 2, 3, 4].my_count).to eq(4)
+    end
+
+    it 'When an array is empty and no block is given, will return 0' do
+      expect([].my_count).to eq(0)
+    end
+
+    it 'raises an ArgumentError when more than one arguments are given' do
+      expect { [1, 2, 3, 4].my_count(String, 1) }.to raise_error(ArgumentError)
+    end
+
+    it 'When block is given, it evaluates the elements and returns the elements when them meets the condition' do
+      expect([1, 2, 3, 4].my_count { |x| (x % 2).zero? }).to eq(2)
+    end
+
+    it 'When an argument (not a Class or RegEx) is passed, it evaluates the elements and returns the
+    elements that meets the conditions' do
+      expect([1, 2, 3, 4].my_count(2)).to eq(1)
+    end
+  end
 end
