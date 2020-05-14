@@ -163,4 +163,16 @@ describe Enumerable do
       expect([1, 2, 3, 4].my_count(2)).to eq(1)
     end
   end
+
+  describe 'my_map' do
+    it 'When block is given, it passes each element as an argument of the
+    method in the block and returns a new array' do
+      expect([18, 22, 5, 6].my_map { |num| num < 10 }).to eq([false, false, true, true])
+    end
+
+    it 'When proc is given, it will priortize proc and return result accordingly' do
+      my_proc = proc { |num| num > 10 }
+      expect([18, 22, 5, 6].my_map(my_proc) { |num| num < 10 }).to eq([true, true, false, false])
+    end
+  end
 end
