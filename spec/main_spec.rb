@@ -24,4 +24,16 @@ describe Enumerable do
       expect(%w[sharon leo anthony].my_each_with_index.class).to eql(Enumerator)
     end
   end
+
+  describe 'my_select' do
+    it 'should return array elements meeting specific condition' do
+      arr = []
+      [1, 2, 3, 4, 5].my_select { |x| arr.push(x) if x.even? }
+      expect(arr).to eq([2, 4])
+    end
+
+    it 'should return enumrator if block is not given' do
+      expect([1, 2, 3, 4, 5].my_select.class).to eq(Enumerator)
+    end
+  end
 end
