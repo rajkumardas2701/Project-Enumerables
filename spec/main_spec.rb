@@ -74,4 +74,42 @@ describe Enumerable do
       expect([1, nil, 3].my_all?).to eql(false)
     end
   end
+
+  describe 'my_any' do
+    it 'should return true if a block is given and any element meets the specified condition' do
+      expect(%w[ant bear cat].my_any? { |word| word.length > 3 }).to eql(true)
+    end
+
+    it 'should return false if a block is given and no element meets the specified condition' do
+      expect(%w[ant bear cat].my_any? { |word| word.length == 1 }).to eql(false)
+    end
+
+    it 'should return false if no element belongs to a specified class' do
+      expect(%w[ant bear cat].my_any?(Numeric)).to eql(false)
+    end
+
+    it 'should return true if any element matches a regular expression' do
+      expect(%w[ant bear barn].my_any?(/t/)).to eql(true)
+    end
+
+    it 'should return false if no element matches a regular expression' do
+      expect(%w[song bro from].my_any?(/t/)).to eql(false)
+    end
+
+    it 'should return true if any element is equal to specified argument' do
+      expect([1, 2, 3].my_any?(1)).to eql(true)
+    end
+
+    it 'should return false if no element is equal to specified argument' do
+      expect([11, 11, 111].my_any?(1)).to eql(false)
+    end
+
+    it 'should return true if at least one element in the array is truthy' do
+      expect([1, nil, nil].my_any?).to eql(true)
+    end
+
+    it 'should return false if all elements evaluate to falsey' do
+      expect([nil, nil, nil].my_any?).to eql(false)
+    end
+  end
 end
