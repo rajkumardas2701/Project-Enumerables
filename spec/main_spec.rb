@@ -36,4 +36,42 @@ describe Enumerable do
       expect([1, 2, 3, 4, 5].my_select.class).to eq(Enumerator)
     end
   end
+
+  describe 'my_all' do
+    it 'should return true if a block is given and all elements meet the specified condition' do
+        expect(%w[ant bear cat].my_all? { |word| word.length >= 3 }).to eql(true)
+    end
+  
+    it 'should return false if a block is given and all elements do not meet the specified condition' do
+        expect(%w[ant bear cat].my_all? { |word| word.length >= 4 }).to eql(false)
+    end
+  
+    it 'should return false if all elements do not belong to a specified class' do
+        expect([1, 'String', 3.14].my_all?(Numeric)).to eql(false)
+    end
+  
+    it 'should return true if all elements match a regular expression' do
+      expect(%w[ant bat cat].my_all?(/t/)).to eql(true)
+    end
+
+    it 'should return false if all elements do not belong to a specified class' do
+      expect(%w[ant bear cat].my_all?(/t/)).to eql(false)
+    end
+
+    it 'should return true if all elements are equal to an argument' do
+      expect([1, 1, 1].my_all?(1)).to eql(true)
+    end
+
+    it 'should return false if all elements are not equal to an argument' do
+      expect([1, 11, 111].my_all?(1)).to eql(false)
+    end
+
+    it 'should return true if no block is given but the array has no falsey value' do
+      expect(%w[ant bear cat].my_all?).to eql(true)
+    end
+
+    it 'should return false if no block is given but the array has a falsey value' do
+      expect([1, nil, 3].my_all?).to eql(false)
+    end
+  end
 end
