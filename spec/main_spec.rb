@@ -112,4 +112,32 @@ describe Enumerable do
       expect([nil, nil, nil].my_any?).to eql(false)
     end
   end
+
+  describe 'my_none?' do
+    it 'When no block and no argument are given, returns `false` when one of the elementes is truthy != (nil, false)' do
+      expect([nil, true, 88].my_none?).to eq(false)
+    end
+
+    it 'When an array is empty and no block is given, will return `true`' do
+      expect([].my_none?).to eq(true)
+    end
+
+    it 'should return false if all elements match a regular expression' do
+      expect(%w[ant bat cat].my_none?(/t/)).to eql(false)
+    end
+
+    it 'When block is given, it evaluates the elements and returns `false` when one of them meets the condition' do
+      expect(%w[ant bat cat].my_none? { |word| word.length >= 3 }).to eq(false)
+    end
+
+    it 'When an argument and a block are given, it ignores the block and returns `false`
+    if one of the elements meets the
+    condition in the argument' do
+      expect(%w[ant bat cat].my_none?(Numeric) { |word| word.length >= 3 }).to eq(false)
+    end
+
+    it 'raises an ArgumentError when more than one arguments are given' do
+      expect { %w[ant bat cat].my_none?(String, 1) }.to raise_error(ArgumentError)
+    end
+  end
 end
