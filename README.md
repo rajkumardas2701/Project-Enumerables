@@ -13,17 +13,16 @@ In this project, you would see methods which are replica of Ruby Enumerable meth
 
 To get a local copy up and running follow these simple example steps.
 
-=> pull repository on your local machine <br>
-=> run ruby main.rb to execute enumerable methods.
+$ git clone https://github.com/rajkumardas2701/Project-Enumerables.git <br> $ bundle install -> run this command to install the required gems <br> $ bin/main.rb -> run this command to run the program <br> $ gem install rspec -> run this command to install rspec <br> $ rspec ->run this command to test the program with rspec
 
 
 ## Authors
 
 👤 **Rajkumar Das**
 
-- Github: [@githubhandle](https://github.com/rajkumardas2701)
-- Twitter: [@twitterhandle](https://twitter.com/Rajkuma58621299)
-- Linkedin: [linkedin](https://www.linkedin.com/in/rajkumar-das-41308961/)
+- Github: [@rajkumardas2701](https://github.com/rajkumardas2701)
+- Twitter: [@Rajkuma58621299](https://twitter.com/Rajkuma58621299)
+- Linkedin: [Rajkumar Das](https://www.linkedin.com/in/rajkumar-das-41308961/)
 
 ## 🤝 Contributing
 

@@ -11,6 +11,16 @@ describe Enumerable do
       a = %w[sharon leo anthony]
       expect(a.my_each.class).to eq(Enumerator)
     end
+
+    it 'should return an enum if no block is given' do
+      a = %w[sharon leo anthony]
+      expect(a.my_each.to_enum).to be_a(Enumerator)
+    end
+
+    it 'should return Class when no Enumerator and block given' do
+      a = %w[sharon leo anthony]
+      expect(a.my_each.to_enum).not_to eq(Class)
+    end
   end
 
   describe 'my_each_with_index' do
@@ -23,6 +33,10 @@ describe Enumerable do
     it 'should return enumrator if block is not given' do
       expect(%w[sharon leo anthony].my_each_with_index.class).to eql(Enumerator)
     end
+
+    it 'should return Class when no bock and Enumerator is given' do
+      expect(%w[sharon leo anthony].my_each_with_index.class).not_to eql(Class)
+    end
   end
 
   describe 'my_select' do
@@ -34,6 +48,10 @@ describe Enumerable do
 
     it 'should return enumrator if block is not given' do
       expect([1, 2, 3, 4, 5].my_select.class).to eq(Enumerator)
+    end
+
+    it 'should return Class when no bock and Enumerator is given' do
+      expect([1, 2, 3, 4, 5].my_select.class).not_to eq(Class)
     end
   end
 
